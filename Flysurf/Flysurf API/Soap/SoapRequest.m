@@ -137,12 +137,18 @@
 // Called when the connection has finished loading.
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	NSError* error;
-	if(self.logging == YES) {
-		NSString* response = [[NSString alloc] initWithData: self.receivedData encoding: NSUTF8StringEncoding];
-		NSLog(@"%@", response);
+	if(self.logging == YES) {        
+        if (self.receivedData) {
+            NSDictionary * list = [NSJSONSerialization JSONObjectWithData:self.receivedData options:NSJSONReadingMutableContainers error:nil];
+            for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+        }
+        
+		//NSString* response = [[NSString alloc] initWithData: self.receivedData encoding: NSUTF8StringEncoding];
+		//NSLog(@"%@", response);
 	}
 	
-	CXMLDocument* doc = [[CXMLDocument alloc] initWithData: self.receivedData options: 0 error: &error];
+	//CXMLDocument* doc = [[CXMLDocument alloc] initWithData: self.receivedData options: 0 error: &error];
+    CXMLDocument* doc = [[CXMLDocument alloc] initWithData: self.receivedData options: 0 error: &error];
 	if(doc == nil) {
 		[self handleError:error];
 		return;
