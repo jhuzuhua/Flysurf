@@ -25,8 +25,6 @@
         NSDictionary * list = [NSJSONSerialization JSONObjectWithData:retData options:NSJSONReadingMutableContainers error:&e];
         for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
     }
-    
-    //NSLog(@"Load:%@",value);
 }
 
 - (void)onerror:(NSError *)error {
