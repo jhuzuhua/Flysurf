@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Soap.h"
 
-@interface ViewController : UIViewController <SoapDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
