@@ -74,9 +74,8 @@
             if ([NSJSONSerialization isValidJSONObject:list]) {
                 //for (NSString * key in list) NSLog(@"%@",key);
                 for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
-                
                 /*for (NSDictionary * entry in news) {
-                    <#statements#>
+                 
                 }*/
             }
         }
