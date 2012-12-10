@@ -20,6 +20,8 @@
 		0AA7865516715EA60026FA0D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7865316715EA60026FA0D /* ViewController.xib */; };
 		4A2745CD16746F2B00F84E51 /* NewsType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2745CC16746F2B00F84E51 /* NewsType.m */; };
 		4A2745D0167474E400F84E51 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2745CF167474E400F84E51 /* News.m */; };
+		4AA813151675A401008E94A3 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA813141675A401008E94A3 /* NewsCell.m */; };
+		4AA813181675A43C008E94A3 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA813171675A43C008E94A3 /* NewsCell.xib */; };
 		4AC21FF61672DFEC004E9E48 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC21FF51672DFEC004E9E48 /* libxml2.dylib */; };
 		4AC21FF81672E0C7004E9E48 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC21FF71672E0C7004E9E48 /* SystemConfiguration.framework */; };
 		4AE6B17D167489D90049EE21 /* NewsComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE6B17C167489D90049EE21 /* NewsComment.m */; };
@@ -46,6 +48,9 @@
 		4A2745CC16746F2B00F84E51 /* NewsType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsType.m; sourceTree = "<group>"; };
 		4A2745CE167474E400F84E51 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		4A2745CF167474E400F84E51 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		4AA813131675A401008E94A3 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		4AA813141675A401008E94A3 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		4AA813171675A43C008E94A3 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		4AC21FF51672DFEC004E9E48 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		4AC21FF71672E0C7004E9E48 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4AE6B17B167489D90049EE21 /* NewsComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsComment.h; sourceTree = "<group>"; };
@@ -102,6 +107,9 @@
 			children = (
 				4A2745C916746EF800F84E51 /* delegate */,
 				4A2745D1167475D100F84E51 /* Model */,
+				4AA813131675A401008E94A3 /* NewsCell.h */,
+				4AA813141675A401008E94A3 /* NewsCell.m */,
+				4AA813171675A43C008E94A3 /* NewsCell.xib */,
 				0AA7865016715EA60026FA0D /* ViewController.h */,
 				0AA7865116715EA60026FA0D /* ViewController.m */,
 				0AA7865316715EA60026FA0D /* ViewController.xib */,
@@ -202,6 +210,7 @@
 				0AA7864D16715EA60026FA0D /* Default@2x.png in Resources */,
 				0AA7864F16715EA60026FA0D /* Default-568h@2x.png in Resources */,
 				0AA7865516715EA60026FA0D /* ViewController.xib in Resources */,
+				4AA813181675A43C008E94A3 /* NewsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +227,7 @@
 				4A2745CD16746F2B00F84E51 /* NewsType.m in Sources */,
 				4A2745D0167474E400F84E51 /* News.m in Sources */,
 				4AE6B17D167489D90049EE21 /* NewsComment.m in Sources */,
+				4AA813151675A401008E94A3 /* NewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
