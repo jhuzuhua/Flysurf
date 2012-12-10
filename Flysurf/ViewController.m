@@ -42,35 +42,27 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%d",NewsList.count);
     return NewsList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Loading cells");
     News * newsForCell = NewsList[indexPath.row];
     NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID];
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID];
     
     if (cell == nil) {
-        NSLog(@"Creating");
-        //NSArray *topObj = [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
-        //cell = topObj[0];
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_ID];
-        cell = [[NewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_ID];
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
     }
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"DD-MM-YYYY"];
     
-    NSLog(@"%@",newsForCell.Title);
     [cell.Thumbnail loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newsForCell.Pic]]];
     [cell.Date setText:[format stringFromDate:newsForCell.Date]];
     [cell.Title setText:newsForCell.Title];
     [cell.Details setText:newsForCell.Text];
     
     format = nil;
-    //[cell.textLabel setText:@"Testing"];
     
     return cell;
 }
@@ -118,7 +110,7 @@
             if ([NSJSONSerialization isValidJSONObject:list]) {
                 [NewsList removeAllObjects];
                 //for (NSString * key in list) NSLog(@"%@",key);
-                //for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+                for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
                 
                 for (NSDictionary * entry in TempNewsList) {
                     NSDateFormatter * format = [[NSDateFormatter alloc] init];
@@ -137,21 +129,24 @@
                     [item setDate:[format dateFromString:entry[nDATE]]];
                     [item setComments:(uint)entry[nCOMMENTS]];
                     
-                    NSArray * commentsList = entry[nCOMMENTSLIST];
-                    NSMutableArray * tempList = [NSMutableArray arrayWithCapacity:commentsList.count];
-                    for (NSDictionary * comment in commentsList) {
-                        NewsComment * itemComment = [[NewsComment alloc] init];
-                        [itemComment setID:(uint)comment[ncID]];
-                        [itemComment setDate:[format dateFromString:comment[ncDATE]]];
-                        [itemComment setPseudonym:comment[ncPSEUDO]];
-                        [itemComment setComments:comment[ncCOMMENTS]];
+                    NSMutableArray * tempList = nil;
+                    if (![entry[nCOMMENTSLIST] isKindOfClass:[NSNull class]]) {
+                        NSArray * commentsList = entry[nCOMMENTSLIST];
+                        tempList = [NSMutableArray arrayWithCapacity:commentsList.count];
                         
-                        [tempList addObject:itemComment];
-                        itemComment = nil;
+                        for (NSDictionary * comment in commentsList) {
+                            NewsComment * itemComment = [[NewsComment alloc] init];
+                            [itemComment setID:(uint)comment[ncID]];
+                            [itemComment setDate:[format dateFromString:comment[ncDATE]]];
+                            [itemComment setPseudonym:comment[ncPSEUDO]];
+                            [itemComment setComments:comment[ncCOMMENTS]];
+                            
+                            [tempList addObject:itemComment];
+                            itemComment = nil;
+                        }
                     }
                     
                     [item setCommentList:tempList];
-                    
                     [NewsList addObject:item];
                     item = nil;
                     
