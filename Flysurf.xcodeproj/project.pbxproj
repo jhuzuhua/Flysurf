@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A7DA778167634D100CFB633 /* commentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7DA776167634D000CFB633 /* commentsController.m */; };
+		0A7DA779167634D100CFB633 /* commentsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A7DA777167634D000CFB633 /* commentsController.xib */; };
 		0AA7863916715EA50026FA0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863816715EA50026FA0D /* UIKit.framework */; };
 		0AA7863B16715EA50026FA0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863A16715EA50026FA0D /* Foundation.framework */; };
 		0AA7863D16715EA50026FA0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863C16715EA50026FA0D /* CoreGraphics.framework */; };
@@ -35,6 +37,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A7DA775167634CF00CFB633 /* commentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commentsController.h; sourceTree = "<group>"; };
+		0A7DA776167634D000CFB633 /* commentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commentsController.m; sourceTree = "<group>"; };
+		0A7DA777167634D000CFB633 /* commentsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentsController.xib; sourceTree = "<group>"; };
 		0AA7863416715EA50026FA0D /* Flysurf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flysurf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA7863816715EA50026FA0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0AA7863A16715EA50026FA0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +132,9 @@
 				4AA813141675A401008E94A3 /* NewsCell.m */,
 				4AA813171675A43C008E94A3 /* NewsCell.xib */,
 				0AA7865016715EA60026FA0D /* ViewController.h */,
+				0A7DA775167634CF00CFB633 /* commentsController.h */,
+				0A7DA776167634D000CFB633 /* commentsController.m */,
+				0A7DA777167634D000CFB633 /* commentsController.xib */,
 				0AA7865116715EA60026FA0D /* ViewController.m */,
 				4ADF7D5C1675BEEC00E7CE80 /* ViewController.xib */,
 				0AA7863F16715EA60026FA0D /* Supporting Files */,
@@ -249,6 +257,7 @@
 				4ADF7D661675CE8F00E7CE80 /* banner.png in Resources */,
 				4ADF7D671675CE8F00E7CE80 /* button.png in Resources */,
 				4ADF7D6B1675D01300E7CE80 /* arrow.png in Resources */,
+				0A7DA779167634D100CFB633 /* commentsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +275,7 @@
 				4A2745D0167474E400F84E51 /* News.m in Sources */,
 				4AE6B17D167489D90049EE21 /* NewsComment.m in Sources */,
 				4AA813151675A401008E94A3 /* NewsCell.m in Sources */,
+				0A7DA778167634D100CFB633 /* commentsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
