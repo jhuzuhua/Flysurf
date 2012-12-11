@@ -54,15 +54,19 @@
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
         cell = [topLevelObjects objectAtIndex:0];
     }
-    
+
+    UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    [v setBackgroundColor:[UIColor colorWithRed:1.03 green:0.32 blue:0.08 alpha:1]];
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"DD-MM-YYYY"];
+    [format setDateFormat:@"dd-MM-yyyy"];
     
     [cell.Thumbnail loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newsForCell.Pic]]];
     [cell.Date setText:[format stringFromDate:newsForCell.Date]];
     [cell.Title setText:newsForCell.Title];
     [cell.Details setText:newsForCell.Text];
+    [cell setSelectedBackgroundView:v];
     
+    v = nil;
     format = nil;
     
     return cell;
@@ -112,11 +116,12 @@
                 [NewsList removeAllObjects];
                 //for (NSString * key in list) NSLog(@"%@",key);
                 //for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+                NSDateFormatter * format = [[NSDateFormatter alloc] init];
+                [format setLocale:[NSLocale systemLocale]];
+                [format setFormatterBehavior:NSDateFormatterBehaviorDefault];
+                [format setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
                 
                 for (NSDictionary * entry in TempNewsList) {
-                    NSDateFormatter * format = [[NSDateFormatter alloc] init];
-                    [format setDateFormat:@"YYYY-MM-DDTHH:mm:ss"];
-                    
                     NewsType * itemType = [[NewsType alloc] init];
                     [itemType setID:(uint)entry[ntID]];
                     [itemType setTitle:entry[ntID]];
@@ -153,6 +158,8 @@
                     
                     [self update];
                 }
+                
+                format = nil;
             }
         }
     }];
