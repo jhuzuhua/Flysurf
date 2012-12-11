@@ -36,7 +36,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -110,7 +110,7 @@
             if ([NSJSONSerialization isValidJSONObject:list]) {
                 [NewsList removeAllObjects];
                 //for (NSString * key in list) NSLog(@"%@",key);
-                for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+                //for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
                 
                 for (NSDictionary * entry in TempNewsList) {
                     NSDateFormatter * format = [[NSDateFormatter alloc] init];
