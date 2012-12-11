@@ -54,6 +54,7 @@
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
         cell = [topLevelObjects objectAtIndex:0];
     }
+    
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"DD-MM-YYYY"];
     
@@ -99,7 +100,7 @@
 
 - (void)getNewsListForNewsType:(uint)type
 {
-    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=1&nbrePage=5",KEY, type];
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=10&nbrePage=5",KEY, type];
     NSURLRequest * request = [self getURLRequestForService:kNEWSLIST WithParameters:parameters];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
@@ -194,7 +195,7 @@
     NewsTypes = [[NSMutableArray alloc] init];
     NewsList = [[NSMutableArray alloc] init];
     
-    [self getNewsListForNewsType:8];
+    [self getNewsListForNewsType:11];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
