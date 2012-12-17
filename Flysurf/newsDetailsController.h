@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 
+<<<<<<< HEAD
 @interface newsDetailsController : UIViewController{
+=======
+@interface newsDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
+>>>>>>> 6f8a4d10bbe3223e45fe343b951fd83eda9b3a46
     IBOutlet UILabel *newsDate;
     IBOutlet UIWebView *newsImage;
     IBOutlet UIWebView *newsText;
@@ -19,6 +23,10 @@
     IBOutlet UILabel* commentsCount;
 }
 
+<<<<<<< HEAD
+=======
+@property (weak, nonatomic) IBOutlet UITableView *CommentsTable;
+>>>>>>> 6f8a4d10bbe3223e45fe343b951fd83eda9b3a46
 @property (nonatomic, retain) IBOutlet UILabel *newsDate;
 @property (nonatomic, retain) IBOutlet UIWebView *newsImage;
 @property (nonatomic, retain) IBOutlet UIWebView *newsText;

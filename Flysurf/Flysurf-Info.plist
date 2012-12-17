@@ -25,10 +25,17 @@
 			<array>
 				<string></string>
 			</array>
+<<<<<<< HEAD
 			<key>UINewsstandBindingType</key>
 			<string>UINewsstandBindingTypeMagazine</string>
 			<key>UINewsstandBindingEdge</key>
 			<string>UINewsstandBindingEdgeLeft</string>
+=======
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+>>>>>>> 6f8a4d10bbe3223e45fe343b951fd83eda9b3a46
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
@@ -54,8 +61,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
