@@ -10,6 +10,7 @@
 
 @interface addNewsController ()
 
+-(IBAction)back:(id)sender;
 @end
 
 @implementation addNewsController
@@ -21,6 +22,10 @@
         // Custom initialization
     }
     return self;
+}
+
+-(IBAction)back:(id)sender{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad

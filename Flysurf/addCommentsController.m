@@ -7,12 +7,17 @@
 //
 
 #import "addCommentsController.h"
+#import "News.h"
 
 @interface addCommentsController ()
-
+@property News* news;
+- (IBAction)back:(id)sender;
+- (id) initWithNews: (News*) newsData;
 @end
 
 @implementation addCommentsController
+
+@synthesize newsTitle, news;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,10 +28,25 @@
     return self;
 }
 
+- (id) initWithNews: (News*) newsData{
+    self = [super initWithNibName:@"addCommentsController" bundle:nil];
+    if (self) {
+        // Custom initialization
+        news = newsData;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [newsTitle setText:[NSString stringWithFormat:@"%@", news.Title]];
+    
     // Do any additional setup after loading the view from its nib.
+}
+
+-(IBAction)back:(id)sender{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "newsDetailsController.h"
+#import "addNewsController.h"
 #import "News.h"
 #import "NewsComment.h"
 #import "NewsType.h"
@@ -24,6 +26,9 @@
 @property(nonatomic,strong) NSMutableArray * NewsList;
 - (void)getNewsTypes;
 - (void)getNewsListForNewsType:(uint)type;
+-(IBAction) selectCategory:(id)sender;
+- (IBAction) addNews: (id) sender;
+-(void) performCategorySelectionWithID: (UIButton*) sender;
 - (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params;
 
 - (void)update;
@@ -33,10 +38,20 @@
 
 @synthesize NewsTable, NewsTypes, NewsList;
 
+BOOL hideNewsTypes;
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //get the specific news for the specific cell clicked.
+    News * newsForCell = NewsList[indexPath.row];
+    
+    newsDetailsController *newsDetails = [[newsDetailsController alloc] initWithNews:newsForCell];
+    
+    [newsDetails setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentModalViewController:newsDetails animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -66,6 +81,8 @@
     [cell.Details setText:newsForCell.Text];
     [cell setSelectedBackgroundView:v];
     
+    NSLog(@"%@", newsForCell.Pic);
+    
     v = nil;
     format = nil;
     
@@ -94,6 +111,8 @@
                     [item setTitle:entry[ntTYPE]];
                     
                     [NewsTypes addObject:item];
+                    
+                    NSLog(@"Title = %@, ID = %@", ntTYPE, ntID);
                     item = nil;
                 }
                 [self update];
@@ -104,7 +123,7 @@
 
 - (void)getNewsListForNewsType:(uint)type
 {
-    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=10&nbrePage=5",KEY, type];
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=20&nbrePage=1",KEY, type];
     NSURLRequest * request = [self getURLRequestForService:kNEWSLIST WithParameters:parameters];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
@@ -194,6 +213,54 @@
     }*/
     
     [NewsTable reloadData];
+    
+    NSLog(@"updating...");
+}
+
+-(IBAction) selectCategory:(id)sender{
+    CGPoint init;
+    init.x = 10;
+    init.y = 397;
+    
+    if (hideNewsTypes){
+        for(UIButton* button in self.view.subviews){
+            if (button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 ||
+                button.tag == 118600512)
+                [self delete:button];
+        }
+        
+        hideNewsTypes = NO;
+    
+    }
+    
+        
+    else
+    {
+        for (NewsType* type in NewsTypes){
+            UIButton *clickable = [[UIButton alloc] initWithFrame:CGRectMake(init.x, init.y, 200, 30)];
+            [clickable setTitle:type.Title forState:UIControlStateNormal];
+            [clickable setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [clickable setBackgroundImage:[UIImage imageNamed:@"yellow.jpg"] forState:UIControlStateNormal];
+            [clickable setTag:type.ID];
+            [clickable addTarget:self action:@selector(performCategorySelectionWithID:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:clickable];
+            NSLog(@"tag %d", type.ID);
+            init.y = init.y - 30;
+            init.x = 10;
+        }
+        
+        hideNewsTypes = YES;
+    }
+}
+
+-(void) performCategorySelectionWithID: (UIButton*) sender{
+    NSLog(@"sender tag = %d", sender.tag);
+    [self getNewsListForNewsType:sender.tag];
+}
+
+- (IBAction) addNews: (id) sender{
+    addNewsController* addNews = [[addNewsController alloc] init];
+    [self presentModalViewController:addNews animated:NO];
 }
 
 #pragma mark - View Methods
@@ -202,7 +269,10 @@
     NewsTypes = [[NSMutableArray alloc] init];
     NewsList = [[NSMutableArray alloc] init];
     
+    [self getNewsTypes];
     [self getNewsListForNewsType:11];
+    
+    hideNewsTypes = NO;
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.

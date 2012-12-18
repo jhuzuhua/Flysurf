@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface commentsController : UIViewController
-
+@interface commentsController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *CommentsTable;
 @end

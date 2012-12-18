@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "News.h"
 
-@interface addCommentsController : UIViewController
+@interface addCommentsController : UIViewController{
+    IBOutlet UITextView *newsTitle;
+}
 
+@property (nonatomic, retain) IBOutlet UITextView *newsTitle;
+- (id) initWithNews: (News*) newsData;
 @end
