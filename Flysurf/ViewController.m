@@ -49,8 +49,8 @@ BOOL hideNewsTypes;
     News * newsForCell = NewsList[indexPath.row];
     
     newsDetailsController *newsDetails = [[newsDetailsController alloc] initWithNews:newsForCell];
-    
     [newsDetails setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
     [self presentModalViewController:newsDetails animated:YES];
 }
 
@@ -81,7 +81,7 @@ BOOL hideNewsTypes;
     [cell.Details setText:newsForCell.Text];
     [cell setSelectedBackgroundView:v];
     
-    NSLog(@"%@", newsForCell.Pic);
+    //NSLog(@"%@", newsForCell.Pic);
     
     v = nil;
     format = nil;
@@ -111,8 +111,6 @@ BOOL hideNewsTypes;
                     [item setTitle:entry[ntTYPE]];
                     
                     [NewsTypes addObject:item];
-                    
-                    NSLog(@"Title = %@, ID = %@", ntTYPE, ntID);
                     item = nil;
                 }
                 [self update];
@@ -213,8 +211,6 @@ BOOL hideNewsTypes;
     }*/
     
     [NewsTable reloadData];
-    
-    NSLog(@"updating...");
 }
 
 -(IBAction) selectCategory:(id)sender{
@@ -222,7 +218,7 @@ BOOL hideNewsTypes;
     init.x = 10;
     init.y = 397;
     
-    if (hideNewsTypes){
+    if (hideNewsTypes) {
         for(UIButton* button in self.view.subviews){
             if (button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 ||
                 button.tag == 118600512)
@@ -230,12 +226,9 @@ BOOL hideNewsTypes;
         }
         
         hideNewsTypes = NO;
-    
     }
     
-        
-    else
-    {
+    else {
         for (NewsType* type in NewsTypes){
             UIButton *clickable = [[UIButton alloc] initWithFrame:CGRectMake(init.x, init.y, 200, 30)];
             [clickable setTitle:type.Title forState:UIControlStateNormal];

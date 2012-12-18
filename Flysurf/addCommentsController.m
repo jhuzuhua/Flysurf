@@ -11,8 +11,6 @@
 
 @interface addCommentsController ()
 @property News* news;
-- (IBAction)back:(id)sender;
-- (id) initWithNews: (News*) newsData;
 @end
 
 @implementation addCommentsController

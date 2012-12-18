@@ -45,7 +45,7 @@
 {
     NewsComment * commentForCell = CommentsList[indexPath.row];
     CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID];
-    
+
     if (cell == nil) {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil];
         cell = [topLevelObjects objectAtIndex:0];

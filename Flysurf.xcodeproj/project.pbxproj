@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A16C7EF16799F54001688F7 /* newsDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A16C7ED16799F54001688F7 /* newsDetailsController.m */; };
 		0A30BAC5168017D700E28179 /* newsDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC4168017D700E28179 /* newsDetailsController.xib */; };
 		0A30BAC7168017F300E28179 /* addCommentsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC6168017F300E28179 /* addCommentsController.xib */; };
 		0A30BAC91680180C00E28179 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC81680180C00E28179 /* CommentsCell.xib */; };
@@ -15,7 +14,6 @@
 		0A4E5EFB167D06B900D151FB /* gray_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5EF9167D06B900D151FB /* gray_bg.png */; };
 		0A4E5EFC167D06B900D151FB /* yellow_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5EFA167D06B900D151FB /* yellow_bg.png */; };
 		0A4E5F01167D110500D151FB /* addCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E5EFF167D110500D151FB /* addCommentsController.m */; };
-		0A4E5F06167D1A6600D151FB /* addNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E5F04167D1A6600D151FB /* addNewsController.m */; };
 		0A4E5F07167D1A6600D151FB /* addNewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5F05167D1A6600D151FB /* addNewsController.xib */; };
 		0A7DA778167634D100CFB633 /* commentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7DA776167634D000CFB633 /* commentsController.m */; };
 		0A7DA779167634D100CFB633 /* commentsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A7DA777167634D000CFB633 /* commentsController.xib */; };
@@ -34,6 +32,8 @@
 		4A2745CD16746F2B00F84E51 /* NewsType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2745CC16746F2B00F84E51 /* NewsType.m */; };
 		4A2745D0167474E400F84E51 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2745CF167474E400F84E51 /* News.m */; };
 		4A4F5955167703560062465D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F5954167703560062465D /* Default@2x.png */; };
+		4A95420516801D1A001EACC9 /* addNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E5F04167D1A6600D151FB /* addNewsController.m */; };
+		4A95420616801D1E001EACC9 /* newsDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A16C7ED16799F54001688F7 /* newsDetailsController.m */; };
 		4AA813151675A401008E94A3 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA813141675A401008E94A3 /* NewsCell.m */; };
 		4AA813181675A43C008E94A3 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA813171675A43C008E94A3 /* NewsCell.xib */; };
 		4AC21FF61672DFEC004E9E48 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC21FF51672DFEC004E9E48 /* libxml2.dylib */; };
@@ -322,6 +322,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A95420616801D1E001EACC9 /* newsDetailsController.m in Sources */,
+				4A95420516801D1A001EACC9 /* addNewsController.m in Sources */,
 				0A30BACA1680191500E28179 /* CommentCell.m in Sources */,
 				0AA7864516715EA60026FA0D /* main.m in Sources */,
 				0AA7864916715EA60026FA0D /* AppDelegate.m in Sources */,
@@ -331,9 +333,7 @@
 				4AE6B17D167489D90049EE21 /* NewsComment.m in Sources */,
 				4AA813151675A401008E94A3 /* NewsCell.m in Sources */,
 				0A7DA778167634D100CFB633 /* commentsController.m in Sources */,
-				0A16C7EF16799F54001688F7 /* newsDetailsController.m in Sources */,
 				0A4E5F01167D110500D151FB /* addCommentsController.m in Sources */,
-				0A4E5F06167D1A6600D151FB /* addNewsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

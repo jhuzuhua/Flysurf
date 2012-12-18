@@ -9,8 +9,6 @@
 #import "addNewsController.h"
 
 @interface addNewsController ()
-
--(IBAction)back:(id)sender;
 @end
 
 @implementation addNewsController
