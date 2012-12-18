@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 
+
 @interface newsDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
     IBOutlet UILabel *newsDate;
     IBOutlet UIWebView *newsImage;

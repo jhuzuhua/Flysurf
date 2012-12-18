@@ -7,7 +7,6 @@
 //
 
 #import "commentsController.h"
-#import "News.h"
 #import "NewsComment.h"
 #import "CommentCell.h"
 

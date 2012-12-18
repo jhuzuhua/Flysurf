@@ -123,7 +123,7 @@ BOOL hideNewsTypes;
 
 - (void)getNewsListForNewsType:(uint)type
 {
-    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=20&nbrePage=1",KEY, type];
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=10&nbrePage=1",KEY, type];
     NSURLRequest * request = [self getURLRequestForService:kNEWSLIST WithParameters:parameters];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {

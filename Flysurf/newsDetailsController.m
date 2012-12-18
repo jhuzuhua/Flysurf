@@ -10,13 +10,16 @@
 #import "News.h"
 #import "NewsComment.h"
 #import "NewsType.h"
-#import "NewsCell.h"
 #import "CommentCell.h"
 #import "addCommentsController.h"
 
 #define CELL_ID @"CommentCell"
 #define FLYSURF_WEBSERVICE @"http://dotnet.flysurf.com/services/news.asmx"
 #define KEY @"@Fly$5F%"
+
+#define kGETNEWSDETAILS @"GetNewsTypes"
+#import "CommentCell.h"
+#import "addCommentsController.h"
 
 #define kGETNEWSDETAILS @"GetNewsTypes"
 
@@ -27,9 +30,11 @@
 -(IBAction) addNewsComment:(id)sender;
 
 @property(nonatomic,strong) NSMutableArray * CommentsList;
+
 @end
 
 @implementation newsDetailsController
+
 
 @synthesize newsImage, newsTitle, newsDate, newsDetails, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable;
 
@@ -83,13 +88,13 @@
     [v setBackgroundColor:[UIColor colorWithRed:1.03 green:0.32 blue:0.08 alpha:1]];
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"dd-MM-yyyy"];
-    
+
     [cell.Author setText:[NSString stringWithFormat:@"%@", newsCommentForCell.Pseudonym]];
     [cell.Date setText:[format stringFromDate:newsCommentForCell.Date]];
     [cell.Details setText:[NSString stringWithFormat:@"%@", newsCommentForCell.Comments]];
     [cell setSelectedBackgroundView:v];
     
-    //NSLog(@"TBViewCell ID - %d, Author - %@", newsCommentForCell.ID, newsCommentForCell.Pseudonym);
+    NSLog(@"TBViewCell ID - %d, Author - %@", newsCommentForCell.ID, newsCommentForCell.Pseudonym);
     
     v = nil;
     format = nil;
@@ -107,7 +112,7 @@
     [newsImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:news.Pic]]];
     
     //get the text and place it on a webview
-    int totalHeight = 0;
+    int totalHeight = 200;
     
     NSString* htmlContentString = [NSString stringWithFormat:
                                    @"<html>"
@@ -125,6 +130,7 @@
     
     totalHeight = newsText.frame.origin.y + (newsText.frame.size.height/2);
     [scrollView setContentSize:CGSizeMake(320, 1200)];
+
     [commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.CommentList.count]];
     
     //display comments
@@ -133,7 +139,6 @@
     NSLog(@"%@", TempCommentsList);
     
     for (NewsComment *comment in TempCommentsList){
-        
         [CommentsList addObject:comment];
         NSLog(@"ID - %d, Author - %@", comment.ID, comment.Pseudonym);
         
@@ -153,7 +158,7 @@
 -(IBAction) addNewsComment:(id)sender{
     addCommentsController* addComment = [[addCommentsController alloc] initWithNews: news];
     [addComment setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentModalViewController:addComment animated:NO];
+    [self presentModalViewController:addComment animated:YES];
 }
 
 - (void)update
@@ -166,7 +171,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     CommentsList = [[NSMutableArray alloc] init];
     [self assignNewsDetails];
     // Do any additional setup after loading the view from its nib.
