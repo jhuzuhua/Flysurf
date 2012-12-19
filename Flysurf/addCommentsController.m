@@ -10,7 +10,9 @@
 #import "News.h"
 
 @interface addCommentsController ()
-@property News* news;
+@property(nonatomic,strong) News* news;
+
+@property(nonatomic,retain) IBOutlet UILabel *newsTitle;
 @end
 
 @implementation addCommentsController
@@ -43,7 +45,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
--(IBAction)back:(id)sender{
+-(IBAction)back {
     [self dismissModalViewControllerAnimated:YES];
 }
 

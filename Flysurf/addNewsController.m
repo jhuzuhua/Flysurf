@@ -22,7 +22,7 @@
     return self;
 }
 
--(IBAction)back:(id)sender{
+-(IBAction)back {
     [self dismissModalViewControllerAnimated:YES];
 }
 

@@ -45,7 +45,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{9, 0}, {70, 24}}</string>
 								<reference key="NSSuperview" ref="549480327"/>
-								<reference key="NSNextKeyView" ref="143431745"/>
+								<reference key="NSNextKeyView" ref="525138922"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -76,8 +76,9 @@
 							<object class="IBUILabel" id="143431745">
 								<reference key="NSNextResponder" ref="549480327"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{63, 3}, {96, 21}}</string>
+								<string key="NSFrame">{{63, 3}, {200, 21}}</string>
 								<reference key="NSSuperview" ref="549480327"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -108,6 +109,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{9, 21}, {299, 106}}</string>
 								<reference key="NSSuperview" ref="549480327"/>
+								<reference key="NSNextKeyView" ref="143431745"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -218,18 +220,21 @@
 						<reference key="object" ref="320905327"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="1063255230"/>
+						<string key="objectName">Pseudonym</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
 						<reference key="object" ref="143431745"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="1063255230"/>
+						<string key="objectName">Date</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">70</int>
 						<reference key="object" ref="525138922"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="1063255230"/>
+						<string key="objectName">Details</string>
 					</object>
 				</array>
 			</object>

@@ -24,11 +24,15 @@
 #define kGETNEWSDETAILS @"GetNewsTypes"
 
 @interface newsDetailsController ()
-@property News* news;
--(id)initWithNews:(News *) newsForDisplay;
--(IBAction)back:(id)sender;
--(IBAction) addNewsComment:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableView *CommentsTable;
+@property (nonatomic, retain) IBOutlet UILabel *newsDate;
+@property (nonatomic, retain) IBOutlet UIWebView *newsImage;
+@property (nonatomic, retain) IBOutlet UIWebView *newsText;
+@property (nonatomic, retain) IBOutlet UILabel *newsTitle;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UILabel* commentsCount;
 
+@property(nonatomic,strong) News* news;
 @property(nonatomic,strong) NSMutableArray * CommentsList;
 
 @end
@@ -36,7 +40,7 @@
 @implementation newsDetailsController
 
 
-@synthesize newsImage, newsTitle, newsDate, newsDetails, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable;
+@synthesize newsImage, newsTitle, newsDate, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,14 +91,14 @@
     UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     [v setBackgroundColor:[UIColor colorWithRed:1.03 green:0.32 blue:0.08 alpha:1]];
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"dd-MM-yyyy"];
+    [format setDateFormat:@"dd/MM/yyyy 'à' HH'H'mm"];
 
     [cell.Author setText:[NSString stringWithFormat:@"%@", newsCommentForCell.Pseudonym]];
-    [cell.Date setText:[format stringFromDate:newsCommentForCell.Date]];
+    [cell.Date setText:[NSString stringWithFormat:@"- %@",[format stringFromDate:newsCommentForCell.Date]]];
     [cell.Details setText:[NSString stringWithFormat:@"%@", newsCommentForCell.Comments]];
     [cell setSelectedBackgroundView:v];
     
-    NSLog(@"TBViewCell ID - %d, Author - %@", newsCommentForCell.ID, newsCommentForCell.Pseudonym);
+    //NSLog(@"TBViewCell ID - %d, Author - %@", newsCommentForCell.ID, newsCommentForCell.Pseudonym);
     
     v = nil;
     format = nil;
@@ -117,7 +121,7 @@
     NSString* htmlContentString = [NSString stringWithFormat:
                                    @"<html>"
                                    "<style type=\"text/css\">"
-                                   "body { background-color:transparent; font-size:16px; text-align: justify;}"
+                                   "body { background-color:transparent; font-size:20px; text-align: justify;}"
                                    "</style>"
                                    "<body>"
                                    "<p>%@</p>"
@@ -136,22 +140,20 @@
     //display comments
     NSArray* TempCommentsList = news.CommentList;
     
-    NSLog(@"%@", TempCommentsList);
-    
     for (NewsComment *comment in TempCommentsList){
         [CommentsList addObject:comment];
-        NSLog(@"ID - %d, Author - %@", comment.ID, comment.Pseudonym);
-        
-        [self update];
+        //NSLog(@"ID - %d, Author - %@", comment.ID, comment.Pseudonym);
     }
     
-    //end of processing newsComments
+    [CommentsTable reloadData];
     
+    //end of processing newsComments
+
     totalHeight = totalHeight + newsText.frame.origin.y + (newsText.frame.size.height/2);
     [scrollView setContentSize:CGSizeMake(320, 1100)];
 }
 
--(IBAction)back:(id)sender{
+-(IBAction)back {
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -159,13 +161,6 @@
     addCommentsController* addComment = [[addCommentsController alloc] initWithNews: news];
     [addComment setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addComment animated:YES];
-}
-
-- (void)update
-{
-    [CommentsTable reloadData];
-    
-    NSLog(@"updating...");
 }
 
 - (void)viewDidLoad

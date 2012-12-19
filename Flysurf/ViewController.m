@@ -138,7 +138,7 @@ static int NewsTypeAddress = 0;
             if ([NSJSONSerialization isValidJSONObject:list]) {
                 [NewsList removeAllObjects];
                 //for (NSString * key in list) NSLog(@"%@",key);
-                for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+                //for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
                 NSDateFormatter * format = [[NSDateFormatter alloc] init];
                 [format setLocale:[NSLocale systemLocale]];
                 [format setFormatterBehavior:NSDateFormatterBehaviorDefault];
@@ -242,7 +242,8 @@ static int NewsTypeAddress = 0;
 
 - (IBAction) addNews: (id) sender{
     addNewsController* addNews = [[addNewsController alloc] init];
-    [self presentModalViewController:addNews animated:NO];
+    
+    [self presentModalViewController:addNews animated:YES];
 }
 
 #pragma mark - View Methods
