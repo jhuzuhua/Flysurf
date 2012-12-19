@@ -138,7 +138,7 @@ static int NewsTypeAddress = 0;
             if ([NSJSONSerialization isValidJSONObject:list]) {
                 [NewsList removeAllObjects];
                 //for (NSString * key in list) NSLog(@"%@",key);
-                //for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
+                for (NSString * key in list) NSLog(@"Key:%@ Contents:%@",key ,list[key]);
                 NSDateFormatter * format = [[NSDateFormatter alloc] init];
                 [format setLocale:[NSLocale systemLocale]];
                 [format setFormatterBehavior:NSDateFormatterBehaviorDefault];

@@ -174,6 +174,7 @@
 
     CommentsList = [[NSMutableArray alloc] init];
     [self assignNewsDetails];
+    [CommentsTable reloadData];
     // Do any additional setup after loading the view from its nib.
 }
 
