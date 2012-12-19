@@ -10,7 +10,6 @@
 		0A30BAC5168017D700E28179 /* newsDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC4168017D700E28179 /* newsDetailsController.xib */; };
 		0A30BAC7168017F300E28179 /* addCommentsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC6168017F300E28179 /* addCommentsController.xib */; };
 		0A30BAC91680180C00E28179 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A30BAC81680180C00E28179 /* CommentsCell.xib */; };
-		0A30BACA1680191500E28179 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A858013167C45C7009CD81D /* CommentCell.m */; };
 		0A4E5EFB167D06B900D151FB /* gray_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5EF9167D06B900D151FB /* gray_bg.png */; };
 		0A4E5EFC167D06B900D151FB /* yellow_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5EFA167D06B900D151FB /* yellow_bg.png */; };
 		0A4E5F01167D110500D151FB /* addCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E5EFF167D110500D151FB /* addCommentsController.m */; };
@@ -26,6 +25,7 @@
 		0AA7864916715EA60026FA0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7864816715EA60026FA0D /* AppDelegate.m */; };
 		0AA7864F16715EA60026FA0D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7864E16715EA60026FA0D /* Default-568h@2x.png */; };
 		0AA7865216715EA60026FA0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7865116715EA60026FA0D /* ViewController.m */; };
+		0AEDC63E16815D0E00927B8C /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A858013167C45C7009CD81D /* CommentCell.m */; };
 		0AFB57101675B12C006E89CB /* yellow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0AFB570B1675B12C006E89CB /* yellow.jpg */; };
 		0AFB57171675B2A7006E89CB /* fb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0AFB57151675B2A7006E89CB /* fb.jpg */; };
 		0AFB57181675B2A7006E89CB /* back_arrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0AFB57161675B2A7006E89CB /* back_arrow.jpg */; };
@@ -330,9 +330,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEDC63E16815D0E00927B8C /* CommentCell.m in Sources */,
 				4A95420616801D1E001EACC9 /* newsDetailsController.m in Sources */,
 				4A95420516801D1A001EACC9 /* addNewsController.m in Sources */,
-				0A30BACA1680191500E28179 /* CommentCell.m in Sources */,
 				0AA7864516715EA60026FA0D /* main.m in Sources */,
 				0AA7864916715EA60026FA0D /* AppDelegate.m in Sources */,
 				0AA7865216715EA60026FA0D /* ViewController.m in Sources */,
