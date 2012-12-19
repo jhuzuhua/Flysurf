@@ -21,24 +21,24 @@
 #define kGETNEWSTYPES @"GetNewsTypes"
 #define kNEWSLIST @"NewsList"
 
+static int NewsTypeAddress = 0;
+
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITableView * NewsTable;
+@property (weak, nonatomic) IBOutlet UITextField * NewsTypeChoice;
+@property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
+
 @property(nonatomic,strong) NSMutableArray * NewsTypes;
 @property(nonatomic,strong) NSMutableArray * NewsList;
 - (void)getNewsTypes;
 - (void)getNewsListForNewsType:(uint)type;
--(IBAction) selectCategory:(id)sender;
-- (IBAction) addNews: (id) sender;
--(void) performCategorySelectionWithID: (UIButton*) sender;
 - (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params;
-
-- (void)update;
 @end
 
 @implementation ViewController
 
-@synthesize NewsTable, NewsTypes, NewsList;
-
-BOOL hideNewsTypes;
+@synthesize NewsTable, NewsTypeChoice, ActivityIndicator;
+@synthesize NewsTypes, NewsList;
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,13 +107,17 @@ BOOL hideNewsTypes;
                 
                 for (NSDictionary * entry in NewsTypesList) {
                     NewsType * item = [[NewsType alloc] init];
-                    [item setID:(uint)entry[ntID]];
+                    [item setID:(uint)[entry[ntID] intValue]];
                     [item setTitle:entry[ntTYPE]];
                     
                     [NewsTypes addObject:item];
                     item = nil;
                 }
-                [self update];
+                //for (NewsType * entry in NewsTypes) { NSLog(@"%@",entry.Title); }
+                NewsType * firstType = NewsTypes[0];
+
+                [NewsTypeChoice setText:firstType.Title];
+                [self getNewsListForNewsType:firstType.ID];
             }
         }
     }];
@@ -123,6 +127,8 @@ BOOL hideNewsTypes;
 {
     NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsType=%d&pageSize=10&nbrePage=1",KEY, type];
     NSURLRequest * request = [self getURLRequestForService:kNEWSLIST WithParameters:parameters];
+ 
+    [ActivityIndicator setHidden:NO];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
         if (data) {
@@ -140,11 +146,11 @@ BOOL hideNewsTypes;
                 
                 for (NSDictionary * entry in TempNewsList) {
                     NewsType * itemType = [[NewsType alloc] init];
-                    [itemType setID:(uint)entry[ntID]];
-                    [itemType setTitle:entry[ntID]];
+                    [itemType setID:(uint)[entry[ntID] intValue]];
+                    [itemType setTitle:entry[ntTYPE]];
                     
                     News * item = [[News alloc] init];
-                    [item setID:(uint)entry[nID]];
+                    [item setID:(uint)[entry[nID] intValue]];
                     [item setType:itemType];
                     [item setTitle:entry[nTITLE]];
                     [item setText:entry[nTEXT]];
@@ -159,7 +165,7 @@ BOOL hideNewsTypes;
                         
                         for (NSDictionary * comment in commentsList) {
                             NewsComment * itemComment = [[NewsComment alloc] init];
-                            [itemComment setID:(uint)comment[ncID]];
+                            [itemComment setID:(uint)[comment[ncID] intValue]];
                             [itemComment setDate:[format dateFromString:comment[ncDATE]]];
                             [itemComment setPseudonym:comment[ncPSEUDO]];
                             [itemComment setComments:comment[ncCOMMENTS]];
@@ -173,7 +179,16 @@ BOOL hideNewsTypes;
                     [NewsList addObject:item];
                     item = nil;
                     
-                    [self update];
+                    /*for (News * entry in NewsList) {
+                        NSLog(@"%@",entry.Title);
+                        
+                        for (NewsComment * entryComment in entry.CommentList) {
+                            NSLog(@"%@",entryComment.Comments);
+                        }
+                    }*/
+                    
+                    [NewsTable reloadData];
+                    [ActivityIndicator setHidden:YES];
                 }
                 
                 format = nil;
@@ -198,57 +213,31 @@ BOOL hideNewsTypes;
     return request;
 }
 
-- (void)update
-{
-    //for (NewsType * entry in NewsTypes) { NSLog(@"%@",entry.Title); }
+#pragma mark - IBActions
+-(IBAction)selectPreviousCategory{
+    NewsTypeAddress++;
     
-    /*for (News * entry in NewsList) {
-        NSLog(@"%@",entry.Title);
-        
-        for (NewsComment * entryComment in entry.CommentList) {
-            NSLog(@"%@",entryComment.Comments);
-        }
-    }*/
-    
-    [NewsTable reloadData];
-}
-
--(IBAction) selectCategory:(id)sender{
-    CGPoint init;
-    init.x = 10;
-    init.y = 397;
-    
-    if (hideNewsTypes) {
-        for(UIButton* button in self.view.subviews){
-            if (button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 || button.tag == 118600512 ||
-                button.tag == 118600512)
-                [self delete:button];
-        }
-        
-        hideNewsTypes = NO;
+    if (NewsTypeAddress >= [NewsTypes count]) {
+        NewsTypeAddress = 0;
     }
     
-    else {
-        for (NewsType* type in NewsTypes){
-            UIButton *clickable = [[UIButton alloc] initWithFrame:CGRectMake(init.x, init.y, 200, 30)];
-            [clickable setTitle:type.Title forState:UIControlStateNormal];
-            [clickable setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [clickable setBackgroundImage:[UIImage imageNamed:@"yellow.jpg"] forState:UIControlStateNormal];
-            [clickable setTag:type.ID];
-            [clickable addTarget:self action:@selector(performCategorySelectionWithID:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:clickable];
-            NSLog(@"tag %d", type.ID);
-            init.y = init.y - 30;
-            init.x = 10;
-        }
-        
-        hideNewsTypes = YES;
-    }
+    NewsType * typeChosen = NewsTypes[NewsTypeAddress];
+    
+    [NewsTypeChoice setText:typeChosen.Title];
+    [self getNewsListForNewsType:typeChosen.ID];
 }
 
--(void) performCategorySelectionWithID: (UIButton*) sender{
-    NSLog(@"sender tag = %d", sender.tag);
-    [self getNewsListForNewsType:sender.tag];
+-(IBAction)selectNextCategory{
+    NewsTypeAddress--;
+    
+    if (NewsTypeAddress < 0) {
+        NewsTypeAddress = [NewsTypes count] - 1;
+    }
+    
+    NewsType * typeChosen = NewsTypes[NewsTypeAddress];
+    
+    [NewsTypeChoice setText:typeChosen.Title];
+    [self getNewsListForNewsType:typeChosen.ID];
 }
 
 - (IBAction) addNews: (id) sender{
@@ -263,9 +252,7 @@ BOOL hideNewsTypes;
     NewsList = [[NSMutableArray alloc] init];
     
     [self getNewsTypes];
-    [self getNewsListForNewsType:11];
-    
-    hideNewsTypes = NO;
+    //[self getNewsListForNewsType:11];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
