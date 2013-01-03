@@ -36,8 +36,8 @@
 @property (nonatomic, strong) NSString* Username;
 @property (nonatomic, strong) NSString* Password;
 @property (nonatomic, strong) NSString* PersonID;
-@property(nonatomic,strong) News* news;
-@property(nonatomic,strong) NSMutableArray * CommentsList;
+@property (nonatomic,strong) News* news;
+@property (nonatomic,strong) NSMutableArray * CommentsList;
 
 - (NSURLRequest *)getLoginRequestForService:(NSString *)function WithParameters:(NSString *)params;
 - (IBAction) showComments;
@@ -122,7 +122,7 @@
     [newsImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:news.Pic]]];
     
     //get the text and place it on a webview
-    int totalHeight = 200;
+    float totalHeight = 100;
     
     NSString* htmlContentString = [NSString stringWithFormat:
                                    @"<html>"
@@ -134,44 +134,34 @@
                                    "</body></html>", news.Text];
     
     CGSize expectedLabelSize = [htmlContentString sizeWithFont:[UIFont systemFontOfSize:14]
-                                            constrainedToSize:CGSizeMake(280, 1195)
+                                            constrainedToSize:CGSizeMake(280, 600)
                                                 lineBreakMode:NSLineBreakByCharWrapping];
     
     CGRect newFrame = newsText.frame;
     newFrame.size.height = expectedLabelSize.height;
-    
-    NSLog(@"height %f", expectedLabelSize.height);
+
+    if (news.Text == NULL) totalHeight = 100;
+    else totalHeight = totalHeight + expectedLabelSize.height + 80;
+    NSLog(@"total height %f", totalHeight);
     
     newsText.frame = newFrame;
     
     [newsText loadHTMLString:htmlContentString baseURL:nil];
     
-    newFrame.origin.y = expectedLabelSize.height + 20;
-    newFrame.origin.x = 10;
+    newFrame.size.width = 60;
+    newFrame.size.height = 45;
+    newFrame.origin.y = totalHeight - 60.0;
+    newFrame.origin.x = 20.0;
     
     commentButton.frame = newFrame;
+    
+    NSLog(@"comment button x y %f, %f", commentButton.frame.origin.x, commentButton.frame.origin.y);
     
     //set Comments Count
     //[commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.Comments]];
     
-    [scrollView setContentSize:CGSizeMake(320, 1200)];
-
-    [commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.CommentList.count]];
+    [scrollView setContentSize:CGSizeMake(320, totalHeight)];
     
-    //display comments
-    NSArray* TempCommentsList = news.CommentList;
-    
-    for (NewsComment *comment in TempCommentsList){
-        [CommentsList addObject:comment];
-        //NSLog(@"ID - %d, Author - %@", comment.ID, comment.Pseudonym);
-    }
-    
-    [CommentsTable reloadData];
-    
-    //end of processing newsComments
-
-    totalHeight = totalHeight + newsText.frame.origin.y + (newsText.frame.size.height/2);
-    [scrollView setContentSize:CGSizeMake(320, 1100)];
 }
 
 -(IBAction)back {

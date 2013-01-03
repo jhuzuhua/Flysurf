@@ -256,7 +256,7 @@
 								<string key="NSFrame">{{20, 173}, {280, 195}}</string>
 								<reference key="NSSuperview" ref="815525718"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="295039777"/>
+								<reference key="NSNextKeyView" ref="945420321"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="458291250"/>
 								<int key="IBUIContentMode">2</int>
@@ -271,7 +271,7 @@
 								<string key="NSFrame">{{20, 393}, {115, 21}}</string>
 								<reference key="NSSuperview" ref="815525718"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="745150111"/>
+								<reference key="NSNextKeyView" ref="768358544"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -299,7 +299,7 @@
 								<string key="NSFrame">{{229, 385}, {71, 29}}</string>
 								<reference key="NSSuperview" ref="815525718"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="945420321"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -336,7 +336,7 @@
 								<string key="NSFrame">{{0, 385}, {320, 40}}</string>
 								<reference key="NSSuperview" ref="815525718"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="745150111"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="279252068"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -347,9 +347,8 @@
 								<string key="NSFrame">{{20, 390}, {98, 29}}</string>
 								<reference key="NSSuperview" ref="815525718"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="768358544"/>
+								<reference key="NSNextKeyView" ref="295039777"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -369,7 +368,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 96}, {320, 744}}</string>
+						<string key="NSFrame">{{0, 96}, {320, 364}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="170387780"/>
@@ -468,6 +467,14 @@
 						<reference key="destination" ref="867497278"/>
 					</object>
 					<int key="connectionID">87</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="745150111"/>
+					</object>
+					<int key="connectionID">93</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -656,7 +663,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">92</int>
+			<int key="maxID">93</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -676,6 +683,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="CommentsTable">UITableView</string>
+						<string key="commentButton">UIButton</string>
 						<string key="commentsCount">UILabel</string>
 						<string key="newsDate">UILabel</string>
 						<string key="newsImage">UIWebView</string>
@@ -687,6 +695,10 @@
 						<object class="IBToOneOutletInfo" key="CommentsTable">
 							<string key="name">CommentsTable</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="commentButton">
+							<string key="name">commentButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="commentsCount">
 							<string key="name">commentsCount</string>
