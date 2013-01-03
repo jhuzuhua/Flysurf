@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "News.h"
 
-@interface commentsController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface commentsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *CommentsTable;
+
+- (id)initWithNews:(News*) newsForDisplay;
 @end

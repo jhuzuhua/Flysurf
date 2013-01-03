@@ -7,23 +7,124 @@
 //
 
 #import "addNewsController.h"
+#define FLYSURF_WEBSERVICE @"http://dotnet.flysurf.com/services/news.asmx"
+#define KEY @"@Fly$5F%"
+
+#define kGETNEWSTYPES @"GetNewsTypes"
+#define kNEWSLIST @"NewsList"
+#define kLOGIN @"Login"
+#define kADDNEWS @"AddNews"
+
 
 @interface addNewsController ()
+@property (nonatomic, strong) NSString* PersonID;
+@property (nonatomic, strong) NSString* newsType;
+@property (nonatomic, strong) IBOutlet UIButton* primaryImage;
+@property (nonatomic, strong) UIImagePickerController *imgPicker;
+@property (nonatomic, strong) NSData *imageData;
+@property (nonatomic, strong) IBOutlet UITextView* newsContent;
+@property (nonatomic, strong) IBOutlet UITextField* newsTitle;
+
+- (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params;
+- (IBAction) uploadPhoto: (id)sender;
+- (IBAction) addNewsData: (id) sender;
+- (IBAction) back;
 @end
 
 @implementation addNewsController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize PersonID, newsType, primaryImage, imgPicker, imageData, newsContent, newsTitle;
+
+- (id)initWithPersonID:(NSString*) personID withNewsType: (NSString *) newsTypeID
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"addNewsController" bundle:Nil];
     if (self) {
         // Custom initialization
+        NSLog(@"Logged in with ID: %@", personID);
+        NSLog(@"News Type ID: %@", newsTypeID);
+        PersonID = [NSString stringWithFormat:@"%@", personID];
+        newsType = [NSString stringWithFormat:@"%@", newsTypeID];
+        
     }
     return self;
 }
 
--(IBAction)back {
+
+- (IBAction) back {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText: (NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+    }
+    return YES;
+}
+
+- (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params
+{
+    NSURL * ServiceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",FLYSURF_WEBSERVICE,function]];
+    NSData * requestData = [NSData dataWithBytes:[params UTF8String] length:[params length]];
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:ServiceURL];
+    [request addValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	[request addValue: @"http://tempuri.org/AddNews" forHTTPHeaderField:@"SOAPAction"];
+    [request addValue: @"dotnet.flysurf.com" forHTTPHeaderField:@"Host"];
+	[request addValue: [NSString stringWithFormat:@"%@", requestData] forHTTPHeaderField:@"Content-Length"];
+	[request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestData];
+    
+    return request;
+}
+
+- (IBAction) addNewsData: (id) sender{
+    NSString *title = [NSString stringWithFormat:@"%@", newsTitle.text];
+    NSString *newsText = [NSString stringWithFormat:@"%@", newsContent.text];
+    
+    NSLog(@"Title = %@", title);
+    NSLog(@"Content = %@", newsText);
+    
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&idNewsTypes=%@&idPerson=%@&title=%@&newsText=%@&newsPicture=%@",KEY, newsType, PersonID, title, newsText, imageData];
+    NSURLRequest * request = [self getURLRequestForService:kADDNEWS WithParameters:parameters];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
+        if (response) {
+            
+            NSLog(@"Data: %@", data);
+            NSLog(@"Response: %@", response);
+            NSLog(@"Error: %@", e);
+        }
+    }];
+
+}
+
+-(IBAction)uploadPhoto:(id)sender {
+    self.imgPicker = [[UIImagePickerController alloc] init];
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imgPicker.delegate = self;
+    [self presentModalViewController:self.imgPicker animated:YES];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *profileImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    [primaryImage setImage:profileImage forState:UIControlStateNormal];
+    
+    imageData = UIImageJPEGRepresentation(profileImage, 0.7);
+    
+    //NSString *string = [[NSString alloc] initWithData:imageData encoding:NSUTF8StringEncoding];
+    
+    //NSLog(@"NSString Data of the uploaded image: %@", string);
+    
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad

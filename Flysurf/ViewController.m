@@ -13,6 +13,7 @@
 #import "NewsComment.h"
 #import "NewsType.h"
 #import "NewsCell.h"
+#import "CODialog.h"
 
 #define CELL_ID @"NewsCell"
 #define FLYSURF_WEBSERVICE @"http://dotnet.flysurf.com/services/news.asmx"
@@ -20,6 +21,7 @@
 
 #define kGETNEWSTYPES @"GetNewsTypes"
 #define kNEWSLIST @"NewsList"
+#define kLOGIN @"Login"
 
 static int NewsTypeAddress = 0;
 
@@ -27,18 +29,27 @@ static int NewsTypeAddress = 0;
 @property (weak, nonatomic) IBOutlet UITableView * NewsTable;
 @property (weak, nonatomic) IBOutlet UITextField * NewsTypeChoice;
 @property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
+//@property (nonatomic, strong) CODialog *dialog;
+@property (nonatomic, strong) NSString* Username;
+@property (nonatomic, strong) NSString* Password;
+@property (nonatomic, strong) NSString* PersonID;
+@property (nonatomic, strong) NSString* newsTypeID;
 
 @property(nonatomic,strong) NSMutableArray * NewsTypes;
 @property(nonatomic,strong) NSMutableArray * NewsList;
+
 - (void)getNewsTypes;
 - (void)getNewsListForNewsType:(uint)type;
 - (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params;
+- (NSURLRequest *)getLoginRequestForService:(NSString *)function WithParameters:(NSString *)params;
+- (void)checkCredentials;
+- (void)showForm;
 @end
 
 @implementation ViewController
 
 @synthesize NewsTable, NewsTypeChoice, ActivityIndicator;
-@synthesize NewsTypes, NewsList;
+@synthesize NewsTypes, NewsList, Username, Password, PersonID, newsTypeID;
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,6 +128,8 @@ static int NewsTypeAddress = 0;
                 NewsType * firstType = NewsTypes[0];
 
                 [NewsTypeChoice setText:firstType.Title];
+                
+                newsTypeID = [NSString stringWithFormat:@"%d", firstType.ID];
                 [self getNewsListForNewsType:firstType.ID];
             }
         }
@@ -178,15 +191,7 @@ static int NewsTypeAddress = 0;
                     [item setCommentList:tempList];
                     [NewsList addObject:item];
                     item = nil;
-                    
-                    /*for (News * entry in NewsList) {
-                        NSLog(@"%@",entry.Title);
-                        
-                        for (NewsComment * entryComment in entry.CommentList) {
-                            NSLog(@"%@",entryComment.Comments);
-                        }
-                    }*/
-                    
+                                    
                     [NewsTable reloadData];
                     [ActivityIndicator setHidden:YES];
                 }
@@ -213,6 +218,22 @@ static int NewsTypeAddress = 0;
     return request;
 }
 
+- (NSURLRequest *)getLoginRequestForService:(NSString *)function WithParameters:(NSString *)params
+{
+    NSURL * ServiceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",FLYSURF_WEBSERVICE,function]];
+    NSData * requestData = [NSData dataWithBytes:[params UTF8String] length:[params length]];
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:ServiceURL];
+    [request addValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	[request addValue: @"http://tempuri.org/Login" forHTTPHeaderField:@"SOAPAction"];
+    [request addValue: @"dotnet.flysurf.com" forHTTPHeaderField:@"Host"];
+	[request addValue: [NSString stringWithFormat:@"%@", requestData] forHTTPHeaderField:@"Content-Length"];
+	[request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestData];
+    
+    return request;
+}
+
 #pragma mark - IBActions
 -(IBAction)selectPreviousCategory{
     NewsTypeAddress++;
@@ -224,6 +245,8 @@ static int NewsTypeAddress = 0;
     NewsType * typeChosen = NewsTypes[NewsTypeAddress];
     
     [NewsTypeChoice setText:typeChosen.Title];
+    //track the current NewsType ID
+    newsTypeID = [NSString stringWithFormat:@"%d", typeChosen.ID];
     [self getNewsListForNewsType:typeChosen.ID];
 }
 
@@ -241,7 +264,61 @@ static int NewsTypeAddress = 0;
 }
 
 - (IBAction) addNews: (id) sender{
-    addNewsController* addNews = [[addNewsController alloc] init];
+
+    UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Flysurf Login" message:@"Connectez-vous pour continuer" delegate:self cancelButtonTitle:@"Annuler" otherButtonTitles:@"Entrer", nil];
+    message.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    [message show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Entrer"])
+    {
+        UITextField *uname = [alertView textFieldAtIndex:0];
+        UITextField *pword = [alertView textFieldAtIndex:1];
+        
+        Username = uname.text;
+        Password = pword.text;
+        NSLog(@"Username: %@\nPassword: %@", Username, Password);
+        
+        [self checkCredentials];
+    }
+    
+
+}
+
+- (void)checkCredentials{
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&email=%@&password=%@", KEY, Username, Password];
+    NSURLRequest * request = [self getLoginRequestForService:kLOGIN WithParameters:parameters];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
+        if (data) {
+
+            NSDictionary * list = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&e];
+            int ID = [list[@"ID_PERSONS"] intValue];
+            
+            PersonID = [NSString stringWithFormat:@"%d", ID];
+            
+            if (ID == -1) {
+                UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Login Unsuccessful" message:@"Incorrect Email or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                message.alertViewStyle = UIAlertViewStyleDefault;
+                [message show];
+            }
+            
+            else{
+                PersonID = [NSString stringWithFormat:@"%d", ID];
+                [self showForm];
+            }
+        }
+    }];
+    
+}
+
+- (void) showForm{
+    
+    addNewsController* addNews = [[addNewsController alloc] initWithPersonID:PersonID withNewsType:newsTypeID];
+    [addNews setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:addNews animated:YES];
 }
@@ -253,6 +330,7 @@ static int NewsTypeAddress = 0;
     NewsList = [[NSMutableArray alloc] init];
     
     [self getNewsTypes];
+    //[ActivityIndicator setHidden:YES];
     //[self getNewsListForNewsType:11];
     
     [super viewDidLoad];

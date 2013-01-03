@@ -10,7 +10,7 @@
 #import "News.h"
 
 
-@interface newsDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface newsDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 -(id)initWithNews:(News *) newsForDisplay;
 

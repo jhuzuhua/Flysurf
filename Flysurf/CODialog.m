@@ -880,6 +880,7 @@ CODialogSynth(highlightedIndex)
   
   if (index < (count - 1)) {
     UITextField *nextField = [self.textFields objectAtIndex:index + 1];
+      NSLog(@"Textfield!");
     [nextField becomeFirstResponder];
   } else {
     [textField resignFirstResponder];

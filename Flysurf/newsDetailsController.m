@@ -12,14 +12,15 @@
 #import "NewsType.h"
 #import "CommentCell.h"
 #import "addCommentsController.h"
+#import "commentsController.h"
 
 #define CELL_ID @"CommentCell"
 #define FLYSURF_WEBSERVICE @"http://dotnet.flysurf.com/services/news.asmx"
 #define KEY @"@Fly$5F%"
-
 #define kGETNEWSDETAILS @"GetNewsTypes"
-#import "CommentCell.h"
-#import "addCommentsController.h"
+#define kLOGIN @"Login"
+
+
 
 #define kGETNEWSDETAILS @"GetNewsTypes"
 
@@ -31,16 +32,21 @@
 @property (nonatomic, retain) IBOutlet UILabel *newsTitle;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UILabel* commentsCount;
-
+@property (nonatomic, retain) IBOutlet UIButton* commentButton;
+@property (nonatomic, strong) NSString* Username;
+@property (nonatomic, strong) NSString* Password;
+@property (nonatomic, strong) NSString* PersonID;
 @property(nonatomic,strong) News* news;
 @property(nonatomic,strong) NSMutableArray * CommentsList;
 
+- (NSURLRequest *)getLoginRequestForService:(NSString *)function WithParameters:(NSString *)params;
+- (IBAction) showComments;
 @end
 
 @implementation newsDetailsController
 
 
-@synthesize newsImage, newsTitle, newsDate, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable;
+@synthesize newsImage, newsTitle, newsDate, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable, Username, Password, PersonID, commentButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -121,18 +127,33 @@
     NSString* htmlContentString = [NSString stringWithFormat:
                                    @"<html>"
                                    "<style type=\"text/css\">"
-                                   "body { background-color:transparent; font-size:20px; text-align: justify;}"
+                                   "body { background-color:transparent; font-size:14px; text-align: justify;}"
                                    "</style>"
                                    "<body>"
                                    "<p>%@</p>"
                                    "</body></html>", news.Text];
     
+    CGSize expectedLabelSize = [htmlContentString sizeWithFont:[UIFont systemFontOfSize:14]
+                                            constrainedToSize:CGSizeMake(280, 1195)
+                                                lineBreakMode:NSLineBreakByCharWrapping];
+    
+    CGRect newFrame = newsText.frame;
+    newFrame.size.height = expectedLabelSize.height;
+    
+    NSLog(@"height %f", expectedLabelSize.height);
+    
+    newsText.frame = newFrame;
+    
     [newsText loadHTMLString:htmlContentString baseURL:nil];
     
-    //set Comments Count
-    [commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.Comments]];
+    newFrame.origin.y = expectedLabelSize.height + 20;
+    newFrame.origin.x = 10;
     
-    totalHeight = newsText.frame.origin.y + (newsText.frame.size.height/2);
+    commentButton.frame = newFrame;
+    
+    //set Comments Count
+    //[commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.Comments]];
+    
     [scrollView setContentSize:CGSizeMake(320, 1200)];
 
     [commentsCount setText:[NSString stringWithFormat:@"%d Comments", news.CommentList.count]];
@@ -158,9 +179,83 @@
 }
 
 -(IBAction) addNewsComment:(id)sender{
-    addCommentsController* addComment = [[addCommentsController alloc] initWithNews: news];
+    UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Flysurf Login" message:@"Connectez-vous pour continuer" delegate:self cancelButtonTitle:@"Annuler" otherButtonTitles:@"Entrer", nil];
+    message.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    [message show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Entrer"])
+    {
+        UITextField *uname = [alertView textFieldAtIndex:0];
+        UITextField *pword = [alertView textFieldAtIndex:1];
+        
+        Username = uname.text;
+        Password = pword.text;
+        NSLog(@"Username: %@\nPassword: %@", Username, Password);
+        
+        [self checkCredentials];
+    }
+}
+
+- (void)checkCredentials{
+    NSString* parameters = [NSString stringWithFormat:@"key=%@&email=%@&password=%@", KEY, Username, Password];
+    NSURLRequest * request = [self getLoginRequestForService:kLOGIN WithParameters:parameters];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
+        if (data) {
+            
+            NSDictionary * list = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&e];
+            int ID = [list[@"ID_PERSONS"] intValue];
+            
+            PersonID = [NSString stringWithFormat:@"%d", ID];
+            
+            if (ID == -1) {
+                UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Login Unsuccessful" message:@"Incorrect Email or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                message.alertViewStyle = UIAlertViewStyleDefault;
+                [message show];
+            }
+            
+            else{
+                [self showForm];
+            }
+        }
+    }];
+    
+}
+
+- (NSURLRequest *)getLoginRequestForService:(NSString *)function WithParameters:(NSString *)params
+{
+    NSURL * ServiceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",FLYSURF_WEBSERVICE,function]];
+    NSData * requestData = [NSData dataWithBytes:[params UTF8String] length:[params length]];
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:ServiceURL];
+    [request addValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	[request addValue: @"http://tempuri.org/Login" forHTTPHeaderField:@"SOAPAction"];
+    [request addValue: @"dotnet.flysurf.com" forHTTPHeaderField:@"Host"];
+	[request addValue: [NSString stringWithFormat:@"%@", requestData] forHTTPHeaderField:@"Content-Length"];
+	[request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestData];
+    
+    return request;
+}
+
+- (void) showForm{
+    addCommentsController* addComment = [[addCommentsController alloc] initWithNews: news withPersonID:PersonID];
     [addComment setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addComment animated:YES];
+
+
+}
+
+
+- (IBAction) showComments{
+    
+    commentsController* comments = [[commentsController alloc] initWithNews:news];
+    [comments setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentModalViewController:comments animated:YES];
 }
 
 - (void)viewDidLoad

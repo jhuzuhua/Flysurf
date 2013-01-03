@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "News.h"
 
-@interface addCommentsController : UIViewController
+@interface addCommentsController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate ,UIImagePickerControllerDelegate>
 
-- (id) initWithNews: (News*) newsData;
+- (id) initWithNews: (News*) newsData withPersonID: (NSString*) personID;
 
 @end

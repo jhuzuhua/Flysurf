@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface addNewsController : UIViewController
-
+@interface addNewsController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate ,UIImagePickerControllerDelegate>
+- (id)initWithPersonID:(NSString*) personID withNewsType: (NSString *) newsType;
 @end
