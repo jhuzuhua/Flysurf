@@ -23,12 +23,12 @@
 #define kNEWSLIST @"NewsList"
 #define kLOGIN @"Login"
 
-static int NewsTypeAddress = 0;
-
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView * NewsTable;
-@property (weak, nonatomic) IBOutlet UITextField * NewsTypeChoice;
+@property (weak, nonatomic) IBOutlet UILabel * NewsTypeChoice;
 @property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIPickerView * NewsPicker;
+@property (weak, nonatomic) IBOutlet UINavigationBar * PickerDoneBar;
 //@property (nonatomic, strong) CODialog *dialog;
 @property (nonatomic, strong) NSString* Username;
 @property (nonatomic, strong) NSString* Password;
@@ -37,6 +37,7 @@ static int NewsTypeAddress = 0;
 
 @property(nonatomic,strong) NSMutableArray * NewsTypes;
 @property(nonatomic,strong) NSMutableArray * NewsList;
+@property(nonatomic,assign) uint NewsTypeChosen;
 
 - (void)getNewsTypes;
 - (void)getNewsListForNewsType:(uint)type;
@@ -48,8 +49,40 @@ static int NewsTypeAddress = 0;
 
 @implementation ViewController
 
+@synthesize PickerDoneBar, NewsPicker, NewsTypeChosen;
 @synthesize NewsTable, NewsTypeChoice, ActivityIndicator;
 @synthesize NewsTypes, NewsList, Username, Password, PersonID, newsTypeID;
+
+#pragma mark - UIPickerViewDelegate
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString * title;
+
+    if (NewsTypes.count == row) {
+        title = @"All News";
+    }
+    else {
+        NewsType * typeChosen = NewsTypes[row];
+        title = typeChosen.Title;
+    }
+    
+    return title;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NewsTypeChosen = row;
+}
+
+#pragma mark - UIPickerViewDataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return NewsTypes.count + 1;
+}
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,6 +164,7 @@ static int NewsTypeAddress = 0;
                 
                 newsTypeID = [NSString stringWithFormat:@"%d", firstType.ID];
                 [self getNewsListForNewsType:firstType.ID];
+                [NewsPicker reloadAllComponents];
             }
         }
     }];
@@ -235,32 +269,30 @@ static int NewsTypeAddress = 0;
 }
 
 #pragma mark - IBActions
--(IBAction)selectPreviousCategory{
-    NewsTypeAddress++;
-    
-    if (NewsTypeAddress >= [NewsTypes count]) {
-        NewsTypeAddress = 0;
-    }
-    
-    NewsType * typeChosen = NewsTypes[NewsTypeAddress];
-    
-    [NewsTypeChoice setText:typeChosen.Title];
-    //track the current NewsType ID
-    newsTypeID = [NSString stringWithFormat:@"%d", typeChosen.ID];
-    [self getNewsListForNewsType:typeChosen.ID];
+- (IBAction)pickNewsType
+{
+    [NewsPicker setHidden:NO];
+    [PickerDoneBar setHidden:NO];
 }
 
--(IBAction)selectNextCategory{
-    NewsTypeAddress--;
-    
-    if (NewsTypeAddress < 0) {
-        NewsTypeAddress = [NewsTypes count] - 1;
+- (IBAction)selectNewsType
+{
+    if (NewsTypeChosen == NewsTypes.count) {
+        [NewsTypeChoice setText:@"All News"];
+        newsTypeID = @"0";
+        [self getNewsListForNewsType:0];
+    }
+    else {
+        NewsType * typeChosen = NewsTypes[NewsTypeChosen];
+        
+        [NewsTypeChoice setText:typeChosen.Title];
+        //track the current NewsType ID
+        newsTypeID = [NSString stringWithFormat:@"%d", typeChosen.ID];
+        [self getNewsListForNewsType:typeChosen.ID];
     }
     
-    NewsType * typeChosen = NewsTypes[NewsTypeAddress];
-    
-    [NewsTypeChoice setText:typeChosen.Title];
-    [self getNewsListForNewsType:typeChosen.ID];
+    [NewsPicker setHidden:YES];
+    [PickerDoneBar setHidden:YES];
 }
 
 - (IBAction) addNews: (id) sender{
@@ -284,10 +316,9 @@ static int NewsTypeAddress = 0;
         
         [self checkCredentials];
     }
-    
-
 }
 
+#pragma mark - Login Methods
 - (void)checkCredentials{
     NSString* parameters = [NSString stringWithFormat:@"key=%@&email=%@&password=%@", KEY, Username, Password];
     NSURLRequest * request = [self getLoginRequestForService:kLOGIN WithParameters:parameters];
