@@ -9,6 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-- (IBAction)pickNewsType;
-- (IBAction)selectNewsType;
 @end
