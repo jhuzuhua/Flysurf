@@ -21,6 +21,7 @@
 		0AA7782B16957E2E00CA6FFB /* iphone-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782916957E2E00CA6FFB /* iphone-button.png */; };
 		0AA7782D1695805200CA6FFB /* iphone-button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782C1695805200CA6FFB /* iphone-button2.png */; };
 		0AA7782F1695822C00CA6FFB /* iphone-button3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782E1695822C00CA6FFB /* iphone-button3.png */; };
+		0AA778701696933E00CA6FFB /* hourglass1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7786F1696933E00CA6FFB /* hourglass1.png */; };
 		0AA7863916715EA50026FA0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863816715EA50026FA0D /* UIKit.framework */; };
 		0AA7863B16715EA50026FA0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863A16715EA50026FA0D /* Foundation.framework */; };
 		0AA7863D16715EA50026FA0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863C16715EA50026FA0D /* CoreGraphics.framework */; };
@@ -79,6 +80,7 @@
 		0AA7782916957E2E00CA6FFB /* iphone-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button.png"; sourceTree = "<group>"; };
 		0AA7782C1695805200CA6FFB /* iphone-button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button2.png"; sourceTree = "<group>"; };
 		0AA7782E1695822C00CA6FFB /* iphone-button3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button3.png"; sourceTree = "<group>"; };
+		0AA7786F1696933E00CA6FFB /* hourglass1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hourglass1.png; sourceTree = "<group>"; };
 		0AA7863416715EA50026FA0D /* Flysurf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flysurf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA7863816715EA50026FA0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0AA7863A16715EA50026FA0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,7 @@
 		0AFB570616758859006E89CB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0AA7786F1696933E00CA6FFB /* hourglass1.png */,
 				4A67890B169666100040F156 /* hourglass.png */,
 				0AA7782E1695822C00CA6FFB /* iphone-button3.png */,
 				0AA7782C1695805200CA6FFB /* iphone-button2.png */,
@@ -349,6 +352,7 @@
 				0AA7782D1695805200CA6FFB /* iphone-button2.png in Resources */,
 				0AA7782F1695822C00CA6FFB /* iphone-button3.png in Resources */,
 				4A67890C169666100040F156 /* hourglass.png in Resources */,
+				0AA778701696933E00CA6FFB /* hourglass1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

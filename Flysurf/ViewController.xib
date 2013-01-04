@@ -212,7 +212,6 @@
 								<string key="NSFrame">{{282, 12}, {25, 22}}</string>
 								<reference key="NSSuperview" ref="616337633"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -294,7 +293,7 @@
 							<object class="IBUIImageView" id="142850517">
 								<reference key="NSNextResponder" ref="753260109"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{113, 149}, {95, 100}}</string>
+								<string key="NSFrame">{{145, 176}, {30, 45}}</string>
 								<reference key="NSSuperview" ref="753260109"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="459807824"/>
@@ -303,7 +302,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">hourglass.png</string>
+									<string key="NSResourceName">hourglass1.png</string>
 								</object>
 							</object>
 						</array>
@@ -628,25 +627,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addNews:">id</string>
-						<string key="pickNewsType">id</string>
-						<string key="selectNewsType">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addNews:">
-							<string key="name">addNews:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="pickNewsType">
-							<string key="name">pickNewsType</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectNewsType">
-							<string key="name">selectNewsType</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="ActivityIndicator">UIView</string>
 						<string key="NewsPicker">UIPickerView</string>
@@ -691,7 +671,7 @@
 			<string key="add_news.png">{50, 41}</string>
 			<string key="banner.png">{640, 77}</string>
 			<string key="button.png">{274, 41}</string>
-			<string key="hourglass.png">{380, 400}</string>
+			<string key="hourglass1.png">{346, 469}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

@@ -19,6 +19,7 @@
 @interface addNewsController ()
 @property (nonatomic, strong) NSString* PersonID;
 @property (nonatomic, strong) NSString* newsType;
+@property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
 @property (nonatomic, strong) IBOutlet UIButton* primaryImage;
 @property (nonatomic, strong) UIImagePickerController *imgPicker;
 @property (nonatomic, strong) NSData *imageData;
@@ -33,7 +34,7 @@
 
 @implementation addNewsController
 
-@synthesize PersonID, newsType, primaryImage, imgPicker, imageData, newsContent, newsTitle;
+@synthesize PersonID, newsType, primaryImage, imgPicker, imageData, newsContent, newsTitle, ActivityIndicator;
 
 - (id)initWithPersonID:(NSString*) personID withNewsType: (NSString *) newsTypeID
 {
@@ -63,6 +64,10 @@
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    textView.text = @"";
+}
+
 - (NSURLRequest *)getURLRequestForService:(NSString *)function WithParameters:(NSString *)params
 {
     NSURL * ServiceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",FLYSURF_WEBSERVICE,function]];
@@ -80,6 +85,8 @@
 }
 
 - (IBAction) addNewsData: (id) sender{
+    [ActivityIndicator setHidden:NO];
+    
     NSString *title = [NSString stringWithFormat:@"%@", newsTitle.text];
     NSString *newsText = [NSString stringWithFormat:@"%@", newsContent.text];
     
@@ -96,6 +103,10 @@
             message.alertViewStyle = UIAlertViewStyleDefault;
             
             [message show];
+            
+            [ActivityIndicator setHidden:YES];
+            [self dismissModalViewControllerAnimated:YES];
+            
             NSLog(@"Data: %@", data);
             NSLog(@"Response: %@", response);
             NSLog(@"Error: %@", e);
@@ -133,6 +144,7 @@
 
 - (void)viewDidLoad
 {
+    [ActivityIndicator setHidden:YES];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

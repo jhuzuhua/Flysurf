@@ -16,6 +16,7 @@
 @interface addCommentsController ()
 @property (nonatomic,strong) News* news;
 @property (nonatomic, strong) NSString* PersonID;
+@property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
 
 @property(nonatomic,retain) IBOutlet UILabel *newsTitle;
 @property (nonatomic, strong) IBOutlet UITextView* newsContent;
@@ -26,7 +27,7 @@
 
 @implementation addCommentsController
 
-@synthesize newsTitle, news, PersonID, newsContent, title;
+@synthesize newsTitle, news, PersonID, newsContent, title, ActivityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +67,8 @@
 }
 
 - (IBAction) addCommentsData: (id) sender{
+    [ActivityIndicator setHidden:NO];
+    
     NSString *commentsText = [NSString stringWithFormat:@"%@", newsContent.text];
     NSString *idForNews = [NSString stringWithFormat:@"%d", news.ID];
     
@@ -80,6 +83,9 @@
             UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Successfully Added A Comment" message:@"Please wait for the administrator to approve the comment you submitted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             message.alertViewStyle = UIAlertViewStyleDefault;
             [message show];
+            
+            [ActivityIndicator setHidden:YES];
+            [self dismissModalViewControllerAnimated:YES];
             
             NSLog(@"Data: %@", data);
             NSLog(@"Response: %@", response);
@@ -98,8 +104,13 @@
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    textView.text = @"";
+}
+
 - (void)viewDidLoad
 {
+    [ActivityIndicator setHidden:YES];
     [super viewDidLoad];
     [newsTitle setText:[NSString stringWithFormat:@"%@", news.Title]];
     

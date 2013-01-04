@@ -129,7 +129,7 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<reference key="IBUISelectedTitleColor" ref="718296347"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
+								<object class="NSColor" key="IBUINormalTitleColor" id="496428275">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
@@ -245,7 +245,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC45NDk3MTI3NDg4IDAuOTY5ODY2MDcxNCAwLjg2NTMwOTczNwA</bytes>
+							<bytes key="NSRGB">MC45ODE5NTA1NjQ2IDEgMC45NDIwNTY1OTY0AA</bytes>
 						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -325,6 +325,34 @@
 						<reference key="IBUIFontDescription" ref="998021803"/>
 						<reference key="IBUIFont" ref="215827287"/>
 					</object>
+					<object class="IBUIView" id="569853877">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="717384505">
+								<reference key="NSNextResponder" ref="569853877"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{145, 176}, {30, 45}}</string>
+								<reference key="NSSuperview" ref="569853877"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">hourglass1.png</string>
+								</object>
+							</object>
+						</array>
+						<string key="NSFrame">{{0, 63}, {320, 397}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="717384505"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="496428275"/>
+						<float key="IBUIAlpha">0.80000001192092896</float>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
@@ -386,6 +414,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ActivityIndicator</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="569853877"/>
+					</object>
+					<int key="connectionID">245</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="458638699"/>
 						<reference key="destination" ref="372490531"/>
@@ -439,6 +475,7 @@
 							<reference ref="24196491"/>
 							<reference ref="940736013"/>
 							<reference ref="462893745"/>
+							<reference ref="569853877"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -529,6 +566,21 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Title</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">243</int>
+						<reference key="object" ref="569853877"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="717384505"/>
+						</array>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Loader</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">244</int>
+						<reference key="object" ref="717384505"/>
+						<reference key="parent" ref="569853877"/>
+						<string key="objectName">Hourglass</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -546,6 +598,8 @@
 				<string key="233.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="235.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="236.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="243.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="244.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -554,7 +608,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">242</int>
+			<int key="maxID">245</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -573,11 +627,16 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="ActivityIndicator">UIView</string>
 						<string key="newsContent">UITextView</string>
 						<string key="newsTitle">UILabel</string>
 						<string key="title">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="ActivityIndicator">
+							<string key="name">ActivityIndicator</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="newsContent">
 							<string key="name">newsContent</string>
 							<string key="candidateClassName">UITextView</string>
@@ -605,6 +664,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="back_arrow.png">{12, 24}</string>
 			<string key="banner.png">{640, 77}</string>
+			<string key="hourglass1.png">{346, 469}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
