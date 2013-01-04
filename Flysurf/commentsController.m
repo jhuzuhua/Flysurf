@@ -20,6 +20,7 @@
 @interface commentsController ()
 @property(nonatomic,strong) NSMutableArray * CommentsList;
 @property (nonatomic, retain) IBOutlet UILabel *newsDate;
+@property (weak, nonatomic) IBOutlet UIView * ActivityIndicator;
 @property (nonatomic, strong) NSString* Username;
 @property (nonatomic, strong) NSString* Password;
 @property (nonatomic, strong) NSString* PersonID;
@@ -32,7 +33,7 @@
 
 @implementation commentsController
 @synthesize CommentsTable, CommentsList, news, newsDate;
-@synthesize Username, Password, PersonID, height;
+@synthesize Username, Password, PersonID, height, ActivityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,6 +133,7 @@
         NSLog(@"Username: %@\nPassword: %@", Username, Password);
         
         [self checkCredentials];
+        [ActivityIndicator setHidden:NO];
     }
     
     
@@ -153,6 +155,7 @@
                 UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Login Unsuccessful" message:@"Incorrect Email or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 message.alertViewStyle = UIAlertViewStyleDefault;
                 [message show];
+                [ActivityIndicator setHidden:YES];
             }
             
             else{
@@ -184,6 +187,7 @@
 }
 
 - (void) showForm{
+    [ActivityIndicator setHidden:YES];
     addCommentsController* addComment = [[addCommentsController alloc] initWithNews: news withPersonID:PersonID];
     [addComment setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addComment animated:YES];
@@ -195,6 +199,7 @@
 
 - (void)viewDidLoad
 {
+    [ActivityIndicator setHidden:YES];
     NSArray* TempCommentsList = news.CommentList;
     height = 0;
     

@@ -17,6 +17,10 @@
 		0A4E5F07167D1A6600D151FB /* addNewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4E5F05167D1A6600D151FB /* addNewsController.xib */; };
 		0A7DA778167634D100CFB633 /* commentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7DA776167634D000CFB633 /* commentsController.m */; };
 		0A7DA779167634D100CFB633 /* commentsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A7DA777167634D000CFB633 /* commentsController.xib */; };
+		0AA7782A16957E2E00CA6FFB /* iphone-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782816957E2E00CA6FFB /* iphone-bg.png */; };
+		0AA7782B16957E2E00CA6FFB /* iphone-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782916957E2E00CA6FFB /* iphone-button.png */; };
+		0AA7782D1695805200CA6FFB /* iphone-button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782C1695805200CA6FFB /* iphone-button2.png */; };
+		0AA7782F1695822C00CA6FFB /* iphone-button3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA7782E1695822C00CA6FFB /* iphone-button3.png */; };
 		0AA7863916715EA50026FA0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863816715EA50026FA0D /* UIKit.framework */; };
 		0AA7863B16715EA50026FA0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863A16715EA50026FA0D /* Foundation.framework */; };
 		0AA7863D16715EA50026FA0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA7863C16715EA50026FA0D /* CoreGraphics.framework */; };
@@ -70,6 +74,10 @@
 		0A7DA777167634D000CFB633 /* commentsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentsController.xib; sourceTree = "<group>"; };
 		0A858012167C45C7009CD81D /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = ../CommentCell.h; sourceTree = "<group>"; };
 		0A858013167C45C7009CD81D /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = ../CommentCell.m; sourceTree = "<group>"; };
+		0AA7782816957E2E00CA6FFB /* iphone-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-bg.png"; sourceTree = "<group>"; };
+		0AA7782916957E2E00CA6FFB /* iphone-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button.png"; sourceTree = "<group>"; };
+		0AA7782C1695805200CA6FFB /* iphone-button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button2.png"; sourceTree = "<group>"; };
+		0AA7782E1695822C00CA6FFB /* iphone-button3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-button3.png"; sourceTree = "<group>"; };
 		0AA7863416715EA50026FA0D /* Flysurf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flysurf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA7863816715EA50026FA0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0AA7863A16715EA50026FA0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -215,6 +223,10 @@
 		0AFB570616758859006E89CB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0AA7782E1695822C00CA6FFB /* iphone-button3.png */,
+				0AA7782C1695805200CA6FFB /* iphone-button2.png */,
+				0AA7782816957E2E00CA6FFB /* iphone-bg.png */,
+				0AA7782916957E2E00CA6FFB /* iphone-button.png */,
 				4A913DC716814A0D007B18CF /* back_icon.png */,
 				4A6387311681B6EA000EB6A8 /* back_arrow.png */,
 				4A913DC816814A0E007B18CF /* next_icon.png */,
@@ -329,6 +341,10 @@
 				4A913DCA16814A0E007B18CF /* next_icon.png in Resources */,
 				4A6387321681B6EA000EB6A8 /* back_arrow.png in Resources */,
 				0AF21B5416830345006E0630 /* icon.png in Resources */,
+				0AA7782A16957E2E00CA6FFB /* iphone-bg.png in Resources */,
+				0AA7782B16957E2E00CA6FFB /* iphone-button.png in Resources */,
+				0AA7782D1695805200CA6FFB /* iphone-button2.png in Resources */,
+				0AA7782F1695822C00CA6FFB /* iphone-button3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

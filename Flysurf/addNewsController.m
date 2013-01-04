@@ -92,6 +92,10 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData * data, NSError * e) {
         if (response) {
             
+            UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Successfully Added News" message:@"Please wait for the administrator to approve the news you submitted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            message.alertViewStyle = UIAlertViewStyleDefault;
+            
+            [message show];
             NSLog(@"Data: %@", data);
             NSLog(@"Response: %@", response);
             NSLog(@"Error: %@", e);

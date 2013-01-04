@@ -315,6 +315,7 @@
         NSLog(@"Username: %@\nPassword: %@", Username, Password);
         
         [self checkCredentials];
+        [ActivityIndicator setHidden:NO];
     }
 }
 
@@ -335,6 +336,7 @@
                 UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Login Unsuccessful" message:@"Incorrect Email or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 message.alertViewStyle = UIAlertViewStyleDefault;
                 [message show];
+                [ActivityIndicator setHidden:YES];
             }
             
             else{
@@ -347,7 +349,7 @@
 }
 
 - (void) showForm{
-    
+    [ActivityIndicator setHidden:YES];
     addNewsController* addNews = [[addNewsController alloc] initWithPersonID:PersonID withNewsType:newsTypeID];
     [addNews setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
@@ -361,8 +363,6 @@
     NewsList = [[NSMutableArray alloc] init];
     
     [self getNewsTypes];
-    //[ActivityIndicator setHidden:YES];
-    //[self getNewsListForNewsType:11];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.

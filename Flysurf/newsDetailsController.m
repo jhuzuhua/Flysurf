@@ -33,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UILabel* commentsCount;
 @property (nonatomic, retain) IBOutlet UIButton* commentButton;
+@property (nonatomic, retain) IBOutlet UIImageView* commentButtonBG;
 @property (nonatomic, strong) NSString* Username;
 @property (nonatomic, strong) NSString* Password;
 @property (nonatomic, strong) NSString* PersonID;
@@ -46,7 +47,7 @@
 @implementation newsDetailsController
 
 
-@synthesize newsImage, newsTitle, newsDate, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable, Username, Password, PersonID, commentButton;
+@synthesize newsImage, newsTitle, newsDate, news, newsText, scrollView, commentsCount, CommentsList, CommentsTable, Username, Password, PersonID, commentButton, commentButtonBG;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -148,12 +149,19 @@
     
     [newsText loadHTMLString:htmlContentString baseURL:nil];
     
-    newFrame.size.width = 60;
-    newFrame.size.height = 45;
+    newFrame.size.width = 90;
+    newFrame.size.height = 30;
     newFrame.origin.y = totalHeight - 60.0;
     newFrame.origin.x = 20.0;
     
     commentButton.frame = newFrame;
+    
+    newFrame.size.height = 40;
+    newFrame.size.width = 320;
+    newFrame.origin.x = 0;
+    newFrame.origin.y = commentButton.frame.origin.y - 5;
+    
+    commentButtonBG.frame = newFrame;
     
     NSLog(@"comment button x y %f, %f", commentButton.frame.origin.x, commentButton.frame.origin.y);
     

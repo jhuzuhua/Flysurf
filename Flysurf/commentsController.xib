@@ -12,6 +12,7 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
@@ -128,7 +129,7 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<reference key="IBUISelectedTitleColor" ref="322319848"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
+								<object class="NSColor" key="IBUINormalTitleColor" id="871441721">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
@@ -201,7 +202,6 @@
 						<string key="NSFrame">{{0, 96}, {320, 293}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="305009549"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -250,11 +250,41 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
+					<object class="IBUIView" id="4136095">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIActivityIndicatorView" id="954626375">
+								<reference key="NSNextResponder" ref="4136095"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{143, 156}, {37, 37}}</string>
+								<reference key="NSSuperview" ref="4136095"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIHidesWhenStopped">NO</bool>
+								<bool key="IBUIAnimating">YES</bool>
+								<int key="IBUIStyle">0</int>
+								<object class="NSColor" key="IBUIColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC45NjQ3MDU4ODI0IDAuMjU4ODIzNTI5NCAwLjA3MDU4ODIzNTI5AA</bytes>
+								</object>
+							</object>
+						</array>
+						<string key="NSFrame">{{0, 63}, {320, 397}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="954626375"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="871441721"/>
+						<float key="IBUIAlpha">0.80000001192092896</float>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -311,6 +341,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ActivityIndicator</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="4136095"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="1009121529"/>
 						<reference key="destination" ref="372490531"/>
@@ -361,6 +399,7 @@
 							<reference ref="354549329"/>
 							<reference ref="432935164"/>
 							<reference ref="298447531"/>
+							<reference ref="4136095"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -433,6 +472,20 @@
 						<reference key="object" ref="298447531"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">125</int>
+						<reference key="object" ref="4136095"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="954626375"/>
+						</array>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Loader</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">126</int>
+						<reference key="object" ref="954626375"/>
+						<reference key="parent" ref="4136095"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -448,6 +501,8 @@
 				<string key="110.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="122.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="123.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="125.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="126.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="97.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="98.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="99.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -456,7 +511,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">124</int>
+			<int key="maxID">127</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -475,10 +530,15 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="ActivityIndicator">UIView</string>
 						<string key="CommentsTable">UITableView</string>
 						<string key="newsDate">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="ActivityIndicator">
+							<string key="name">ActivityIndicator</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="CommentsTable">
 							<string key="name">CommentsTable</string>
 							<string key="candidateClassName">UITableView</string>
